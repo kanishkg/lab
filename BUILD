@@ -968,6 +968,7 @@ cc_binary(
     visibility = [
         "//python/pip_package:__subpackages__",
         "//python/tests:__subpackages__",
+	"//unreal:__subpackages__",
     ],
     deps = [
         ":dmlablib",
