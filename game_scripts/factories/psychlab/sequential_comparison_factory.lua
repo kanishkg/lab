@@ -38,8 +38,8 @@ See Luck and Vogel (1997) for an influential example of this kind of experiment.
 -- setup constant parameters of the task
 local GAME = 'psylab_sequential_comparison'
 
-local TIME_TO_FIXATE_CROSS = 1 -- in frames
-local FAST_INTER_TRIAL_INTERVAL = 1 -- in frames
+local TIME_TO_FIXATE_CROSS = 0 -- in frames
+local FAST_INTER_TRIAL_INTERVAL = 0 -- in frames
 local SCREEN_SIZE = {width = 256, height = 256}
 local BG_COLOR = {255, 255, 255}
 local TRIALS_PER_EPISODE_CAP = 60
@@ -48,9 +48,9 @@ local TARGET_SIZE = .75 -- fraction of screen to fill
 
 local GRID = {size = 64, step = 8}
 
-local STUDY_TIME = 90 -- 120 -- in frames  (ignored in self paced mode)
-local DELAY_TIMES = {8, 16, 32, 64, 128, 256} -- in frames
-
+local STUDY_TIME = 1 -- 120 -- in frames  (ignored in self paced mode)
+-- local DELAY_TIMES = {8, 16, 32, 64, 128, 256} -- in frames
+local DELAY_TIMES = {0}
 local ADVANCE_TRIAL_REWARD = 0
 local CORRECT_REWARD = 1
 local INCORRECT_REWARD = 0
@@ -604,7 +604,8 @@ function factory.createLevelApi(kwargs)
   -- Return all data needed to draw the test array and response buttons.
   function env:getTestArrayData(studyArrayData)
     local testArrayData = helpers.deepCopy(studyArrayData)
-    local isNew = random:uniformReal(0, 1) > .5
+    local isNew = random:uniformReal(0, 1) > 0
+
     if not isNew then
       self.currentTrial.transform = 'NONE'
     else
